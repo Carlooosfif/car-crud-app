@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car List</title>
+</head>
+<body>
+    <h1>Lista de Carros</h1>
+    <table id="carTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchCars() {
+            const res = await fetch('/api/cars');
+            const cars = await res.json();
+            const tableBody = document.getElementById('carTable').querySelector('tbody');
+            tableBody.innerHTML = '';
+            cars.forEach(car => {
+                const row = `<tr><td>${car.name}</td><td>${car.price}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        fetchCars();
+    </script>
+</body>
+</html>
