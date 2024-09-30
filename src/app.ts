@@ -10,17 +10,27 @@ const app = express();
 // Conectar a la base de datos
 connectDB();
 
-// Configurar middlewares
+// Middlewares
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas
-app.use('/api/cars', carRoutes);
+app.use('/api/cars', carRoutes);  // Rutas de carros
 app.use('/api/users', userRoutes);
 
 // Ruta para el login
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
+
+//Ruta para el registro
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'register.html'));
+});
+
+// Ruta para la página de carros
+app.get('/cars', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'cars.html'));
 });
 
 // Iniciar el servidor

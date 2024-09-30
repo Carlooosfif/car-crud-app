@@ -37,5 +37,35 @@
             }
         });
     </script>
+    
+    <button id="goToRegister">¿No tienes una cuenta? Regístrate</button>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const res = await fetch('/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (res.ok) {
+                alert('Login exitoso');
+                window.location.href = '/cars'; // Redirigir a la página de carros
+            } else {
+                alert('Login fallido');
+            }
+        });
+
+        // Redirigir a la página de registro cuando se hace clic en el botón
+        document.getElementById('goToRegister').addEventListener('click', () => {
+            window.location.href = '/register';
+        });
+    </script>
 </body>
 </html>
